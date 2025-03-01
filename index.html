@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yipleo作品展示</title>
+  <style>
+    /* 重置默认样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* 设置页面背景色 */
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    /* 图片容器设置 */
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px;
+      justify-content: center;
+    }
+    /* 图片项设置 */
+    .image-item {
+      width: 200px;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .image-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    /* 模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    /* 关闭按钮样式 */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .close-btn:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 图片容器 -->
+  <div class="container" id="imageContainer">
+    <!-- 图片项将通过 JavaScript 动态添加 -->
+  </div>
+
+  <!-- 模态框 -->
+  <div class="modal" id="imageModal">
+    <button class="close-btn" id="closeBtn">&times;</button>
+    <img src="" alt="大图预览" id="modalImage">
+  </div>
+
+  <script>
+    // 图片数据（示例）
+    const images = [
+      'image1.png', 'image2.png', 'image3.png', 'image4.png', 'image5.png',
+      'image6.png', 'image7.png', 'image8.png', 'image9.png', 'image10.png',
+      'image11.png', 'image12.png', 'image13.png', 'image14.png', 'image15.png',
+      'image16.png', 'image17.png', 'image18.png', 'image19.png', 'image20.png',
+      'image21.png', 'image22.png', 'image23.png', 'image24.png', 'image25.png',
+      'image26.png', 'image27.png', 'image28.png', 'image29.png', 'image30.png',
+      'image31.png'
+    ];
+
+    // 获取图片容器元素
+    const imageContainer = document.getElementById('imageContainer');
+
+    // 动态添加图片项
+    images.forEach(imageSrc => {
+      const imageItem = document.createElement('div');
+      imageItem.classList.add('image-item');
+      const img = document.createElement('img');
+      img.src = imageSrc;
+      img.alt = '图片';
+      img.dataset.largeSrc = imageSrc; // 存储大图路径
+      imageItem.appendChild(img);
+      imageContainer.appendChild(imageItem);
+    });
+
+    // 获取模态框元素
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // 为每个图片项添加点击事件
+    imageContainer.addEventListener('click', (e) => {
+      const img = e.target;
+      if (img.tagName.toLowerCase() === 'img') {
+        modalImage.src = img.dataset.largeSrc;
+        modal.style.display = 'flex';
+      }
+    });
+
+    // 点击关闭按钮或模态框区域关闭预览
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+    modal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>
